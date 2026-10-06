@@ -14,7 +14,7 @@ export default function Header({ onOpenContact }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
+  // Prevent background page scrolling when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -104,7 +104,7 @@ export default function Header({ onOpenContact }) {
 
       {/* Main Sticky Navbar */}
       <nav
-        className={`relative transition-all duration-300 ${
+        className={`transition-all duration-300 ${
           isScrolled
             ? 'bg-white shadow-md py-3 border-b border-slate-200'
             : 'bg-white py-3.5 border-b border-slate-100 shadow-sm'
@@ -164,78 +164,106 @@ export default function Header({ onOpenContact }) {
           {/* Mobile & Tablet Toggle (< 1024px) */}
           <div className="flex lg:hidden items-center gap-2">
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen(true)}
               className="p-2.5 rounded-xl bg-slate-100 text-slate-700 hover:text-orange-600 hover:bg-slate-200 border border-slate-200 transition-colors"
-              aria-label="Toggle Menu"
+              aria-label="Open Menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Navigation Drawer Modal */}
-        {isMobileMenuOpen && (
-          <>
-            {/* Dark semi-transparent backdrop to block page content behind */}
-            <div
-              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 lg:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            {/* Completely Opaque, Solid White Mobile Drawer Menu */}
-            <div className="fixed top-[calc(100%)] left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-2xl px-5 py-6 max-h-[calc(100vh-100px)] overflow-y-auto lg:hidden">
-              <div className="flex flex-col gap-1.5">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-base font-semibold text-slate-800 hover:text-orange-600 hover:bg-orange-50/60 px-3 py-3 rounded-xl transition-colors flex items-center justify-between border-b border-slate-100 last:border-0"
-                  >
-                    <span>{link.name}</span>
-                    <ChevronRight className="w-4 h-4 text-slate-400" />
-                  </a>
-                ))}
-
-                {/* Mobile Quick Contact Badges */}
-                <div className="pt-4 pb-2 border-t border-slate-200 grid grid-cols-2 gap-2.5">
-                  {hasPhone && (
-                    <a
-                      href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, '')}`}
-                      className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold hover:bg-slate-200 transition-colors"
-                    >
-                      <Phone className="w-4 h-4 text-orange-600" />
-                      <span>Direct Call</span>
-                    </a>
-                  )}
-
-                  {hasWhatsapp && (
-                    <a
-                      href={`https://wa.me/${BUSINESS_CONFIG.whatsappRaw}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-emerald-50 text-emerald-800 text-xs font-bold hover:bg-emerald-100 transition-colors"
-                    >
-                      <MessageSquare className="w-4 h-4 text-emerald-600" />
-                      <span>WhatsApp</span>
-                    </a>
-                  )}
-                </div>
-
-                {/* Enquire Now Action Button */}
-                <div className="pt-2">
-                  <button
-                    onClick={(e) => handleNavClick(e, '#contact')}
-                    className="w-full text-center py-3.5 text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 rounded-xl shadow-md transition-all active:scale-95"
-                  >
-                    Enquire Now
-                  </button>
-                </div>
+      {/* Full-Screen Mobile Drawer Modal (< 1024px) */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-white flex flex-col justify-between overflow-y-auto lg:hidden animate-in fade-in duration-150">
+          
+          {/* Top Bar inside Mobile Drawer */}
+          <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-white sticky top-0 z-10 shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center shadow-md">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <span className="block font-display text-lg font-extrabold tracking-tight text-slate-900">
+                  TRIDENT <span className="text-orange-600">K9</span>
+                </span>
+                <span className="block text-[9px] tracking-wider uppercase text-slate-500 font-semibold">
+                  Training & Security Academy
+                </span>
               </div>
             </div>
-          </>
-        )}
-      </nav>
+
+            {/* Close Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-orange-600 transition-colors"
+              aria-label="Close Menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Nav Links List */}
+          <div className="px-5 py-6 space-y-2 flex-1">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 mb-2">
+              Menu Navigation
+            </div>
+
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="flex items-center justify-between px-4 py-3.5 rounded-2xl text-base font-bold text-slate-800 hover:text-orange-600 hover:bg-orange-50/80 active:bg-orange-100 transition-all border border-slate-100 hover:border-orange-200"
+              >
+                <span>{link.name}</span>
+                <ChevronRight className="w-5 h-5 text-slate-400" />
+              </a>
+            ))}
+          </div>
+
+          {/* Quick Contact & Action Buttons */}
+          <div className="p-5 border-t border-slate-200 bg-slate-50 space-y-3">
+            <div className="grid grid-cols-2 gap-2.5">
+              {hasPhone && (
+                <a
+                  href={`tel:${BUSINESS_CONFIG.phone.replace(/\s+/g, '')}`}
+                  className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-white border border-slate-200 text-slate-900 text-xs font-bold shadow-sm active:scale-95 transition-all"
+                >
+                  <Phone className="w-4 h-4 text-orange-600 shrink-0" />
+                  <span className="truncate">Call Desk</span>
+                </a>
+              )}
+
+              {hasWhatsapp && (
+                <a
+                  href={`https://wa.me/${BUSINESS_CONFIG.whatsappRaw}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-emerald-600 text-white text-xs font-bold shadow-sm active:scale-95 transition-all"
+                >
+                  <MessageSquare className="w-4 h-4 text-white shrink-0" />
+                  <span>WhatsApp</span>
+                </a>
+              )}
+            </div>
+
+            <button
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="w-full py-4 text-center text-sm font-bold uppercase tracking-wider text-white bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 rounded-xl shadow-md transition-all active:scale-95"
+            >
+              Enquire Now
+            </button>
+
+            <div className="text-center text-[11px] text-slate-500 pt-1">
+              📍 {BUSINESS_CONFIG.region}
+            </div>
+          </div>
+
+        </div>
+      )}
+
     </header>
   );
 }
