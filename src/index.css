@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-family: 'Poppins', 'Roboto', system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+    letter-spacing: -0.015em;
+    color: #0f172a;
+  }
+}
+
+/* Friendly warm scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Warm gradient text for key headlines */
+.copper-gradient-text,
+.brand-gradient-text {
+  background: linear-gradient(135deg, #0f172a 0%, #ea580c 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.warm-amber-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+}
+
+.copper-gradient-bg {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+}
+
+.shadow-copper-glow {
+  box-shadow: 0 8px 20px -4px rgba(234, 88, 12, 0.3);
+}
+
+.soft-light-section {
+  background-color: #ffffff;
+  color: #0f172a;
+}
