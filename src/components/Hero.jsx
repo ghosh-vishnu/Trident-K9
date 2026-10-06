@@ -5,24 +5,24 @@ import { Shield, ArrowRight, CheckCircle2, Award, Heart } from 'lucide-react';
 
 export default function Hero({ onExploreClick, onEnquireClick }) {
   return (
-    <section id="hero" className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center bg-gradient-to-b from-amber-50/40 via-white to-slate-50 overflow-hidden">
+    <section id="hero" className="relative pt-32 pb-14 sm:pt-36 lg:pt-40 lg:pb-24 flex items-center bg-gradient-to-b from-amber-50/40 via-white to-slate-50 overflow-hidden">
       
       {/* Subtle decorative background glow */}
       <div className="absolute top-10 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Hero Content */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6">
             
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-orange-800 text-xs sm:text-sm font-bold tracking-wide shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/80 border border-orange-200 text-orange-800 text-[11px] sm:text-xs font-bold tracking-wide shadow-sm">
               <span className="text-base">🐾</span>
               <span>Gentle Family Pet Manners & 🛡️ Certified K9 Security</span>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+            <h1 className="font-display text-2xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.18] sm:leading-[1.15]">
               Expert Dog Training & <span className="text-orange-600">K9 Security</span> Services
             </h1>
 
